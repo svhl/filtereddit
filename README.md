@@ -46,31 +46,41 @@ git clone https://github.com/svhl/filtereddit
 cd filtereddit
 ```
 
-Install the required modules for frontend with
+Install the required modules and generate CSS for frontend with
 
 ```
+cd frontend
 npm install
+npx tailwindcss-cli -i ./src/index.css -o ./src/output.css
 ```
 
 and for backend with
 
 ```
+cd backend
 py -m venv venv
 venv\Scripts\activate
+```
+
+Set the Python interpreter in VS Code by going to Command Palette (ctrl + shift + p) -> Python: Select Interpreter -> `backend\venv\Scripts\python.exe`, and run
+
+```
 pip install -r requirements.txt
 ```
 
 ### Running
 
-Set the Python interpreter in VS Code by going to Command Palette (ctrl + shift + p) -> Python: Select Interpreter -> `backend\venv\Scripts\python.exe`. Then, start the backend with
+Start the backend with
 
 ```
+cd backend
 py app.py
 ```
 
 and the frontend with
 
 ```
+cd frontend\src
 npm run dev
 ```
 
