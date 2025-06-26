@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:css": "tailwindcss-cli -i ./src/index.css -o ./src/output.css"
   },
   "dependencies": {
     "axios": "^1.10.0",
@@ -26,6 +27,7 @@
     "globals": "^16.0.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.10",
+    "tailwindcss-cli": "^0.1.2",
     "vite": "^6.3.5"
   }
 }

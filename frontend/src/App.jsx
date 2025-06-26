@@ -8,20 +8,20 @@ function App() {
   const [filteredPosts, setFilteredPosts] = useState([]);
 
   const allCategories = [
-    "news",
-    "entertainment",
-    "parenting",
-    "technology",
-    "sports",
-    "politics",
-    "education",
-    "science",
-    "wellness",
     "business",
-    "style & beauty",
+    "education",
+    "entertainment",
     "food",
-    "women & minorities",
+    "news",
+    "parenting",
+    "politics",
+    "science",
+    "sports",
+    "style & beauty",
+    "technology",
     "travel",
+    "wellness",
+    "women & minorities",
   ];
 
   useEffect(() => {
@@ -75,74 +75,112 @@ function App() {
     fetchSubreddits();
   }, []);
 
-  const handleApplyFilter = () => {
-    if (selectedCategories.length === 0) {
-      setFilteredPosts(classified); // show all
-    } else {
-      const filtered = classified.filter((post) =>
-        selectedCategories.includes(post.category.toLowerCase())
-      );
-      setFilteredPosts(filtered);
-    }
-  };
-
-  const handleCheckboxChange = (category) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category)
+  // Remove handleApplyFilter and update toggleCategory to filter immediately
+  const toggleCategory = (category) => {
+    setSelectedCategories((prev) => {
+      const newSelected = prev.includes(category)
         ? prev.filter((c) => c !== category)
-        : [...prev, category]
-    );
+        : [...prev, category];
+      // Apply filter immediately
+      if (newSelected.length === 0) {
+        setFilteredPosts(classified);
+      } else {
+        const filtered = classified.filter((post) =>
+          newSelected.includes(post.category.toLowerCase())
+        );
+        setFilteredPosts(filtered);
+      }
+      return newSelected;
+    });
   };
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold mb-4 text-center">Filtereddit 🔥</h1>
+      <h1 className="text-5xl font-bold mb-4 text-left font-dmserif sm:text-7xl">
+        Filte/r/eddit
+      </h1>
 
       {/* Filter UI */}
       <div className="mb-6">
-        <div className="flex flex-wrap justify-center gap-4 mb-2">
+        <div className="flex flex-wrap justify-start gap-2 mb-10 mt-10">
           {allCategories.map((cat) => (
-            <label key={cat} className="flex items-left gap-1">
-              <input
-                type="checkbox"
-                value={cat}
-                checked={selectedCategories.includes(cat)}
-                onChange={() => handleCheckboxChange(cat)}
-              />
-              <span className="capitalize text-sm">{cat}</span>
-            </label>
+            <span
+              key={cat}
+              onClick={() => toggleCategory(cat)}
+              className={`capitalize text-sm px-3 py-1 cursor-pointer transition select-none ${
+                selectedCategories.includes(cat)
+                  ? cat === "business" ||
+                    cat === "technology" ||
+                    cat === "science" ||
+                    cat === "education"
+                    ? "bg-news text-news-text"
+                    : cat === "politics" ||
+                      cat === "news" ||
+                      cat === "women & minorities"
+                    ? "bg-opinion text-opinion-text"
+                    : cat === "sports" || cat === "entertainment"
+                    ? "bg-sport text-sport-text"
+                    : cat === "food" ||
+                      cat === "parenting" ||
+                      cat === "style & beauty" ||
+                      cat === "travel" ||
+                      cat === "wellness"
+                    ? "bg-lifestyle text-lifestyle-text"
+                    : "bg-gray-400 text-white"
+                  : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+              }`}
+            >
+              {cat}
+            </span>
           ))}
         </div>
-        <div className="text-center">
-          <button
-            onClick={handleApplyFilter}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-          >
-            Apply Filter
-          </button>
-        </div>
+        {/* Removed Apply Filter button */}
       </div>
 
       {/* Posts grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {filteredPosts.map((post, idx) => (
           <div
             key={idx}
-            className="bg-white shadow-md rounded p-4 border border-gray-200"
+            className="bg-white mb-4 break-inside-avoid flex flex-col h-full relative"
           >
-            <h2 className="text-lg font-semibold mb-2">{post.title}</h2>
+            <h2 className="text-lg font-semibold mb-2">
+              <a
+                href={post.permalink}
+                target="_blank"
+                rel="noreferrer"
+                className="text-black-600 hover:underline"
+              >
+                {post.title}
+              </a>
+            </h2>
             <p className="text-sm text-gray-600">{post.subreddit}</p>
-            <a
-              href={post.permalink}
-              target="_blank"
-              rel="noreferrer"
-              className="text-blue-600 hover:underline text-sm block mt-1"
+            <span
+              className={`mt-4 text-xs px-2 py-1 self-start capitalize
+                ${
+                  post.category.toLowerCase() === "business" ||
+                  post.category.toLowerCase() === "technology" ||
+                  post.category.toLowerCase() === "science" ||
+                  post.category.toLowerCase() === "education"
+                    ? "bg-news text-news-text opacity-80"
+                    : post.category.toLowerCase() === "politics" ||
+                      post.category.toLowerCase() === "news" ||
+                      post.category.toLowerCase() === "women & minorities"
+                    ? "bg-opinion text-opinion-text opacity-80"
+                    : post.category.toLowerCase() === "sports" ||
+                      post.category.toLowerCase() === "entertainment"
+                    ? "bg-sport text-sport-text opacity-80"
+                    : post.category.toLowerCase() === "food" ||
+                      post.category.toLowerCase() === "parenting" ||
+                      post.category.toLowerCase() === "style & beauty" ||
+                      post.category.toLowerCase() === "travel" ||
+                      post.category.toLowerCase() === "wellness"
+                    ? "bg-lifestyle text-lifestyle-text opacity-80"
+                    : "bg-gray-400 text-white"
+                }`}
             >
-              View Post
-            </a>
-            <p className="mt-2 text-sm">
-              <span className="font-medium">Category:</span> {post.category}
-            </p>
+              {post.category.charAt(0).toUpperCase() + post.category.slice(1)}
+            </span>
           </div>
         ))}
       </div>
