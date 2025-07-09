@@ -56,6 +56,8 @@ npx tailwindcss-cli -i ./src/index.css -o ./src/output.css
 
 and for backend with
 
+- Windows
+
 ```
 cd backend
 py -m venv venv
@@ -65,6 +67,15 @@ venv\Scripts\activate
 Set the Python interpreter in VS Code by going to Command Palette (ctrl + shift + p) -> Python: Select Interpreter -> `backend\venv\Scripts\python.exe`, and run
 
 ```
+pip install -r requirements.txt
+```
+
+- Linux
+
+```
+cd backend
+py -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -80,7 +91,7 @@ py app.py
 and the frontend with
 
 ```
-cd frontend\src
+cd frontend
 npm run dev
 ```
 
