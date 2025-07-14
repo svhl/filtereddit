@@ -60,12 +60,9 @@ function App() {
 
 				// Classify
 				const titles = rawPosts.map((p) => p.title);
-				const response = await axios.post(
-					"http://localhost:5000/predict",
-					{
-						titles,
-					}
-				);
+				const response = await axios.post("/predict", {
+					titles,
+				});
 
 				const withCategory = rawPosts.map((post, i) => ({
 					...post,
