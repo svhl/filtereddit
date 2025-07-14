@@ -1,6 +1,10 @@
-# Filte/r/eddit
+<h1 align="center">Filte/r/eddit</h1>
 
-Filter topics such as politics, sports, news etc. from Reddit using a trained AI model
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f109cfef-6617-4884-8b21-a086367d3d87" width="400">
+</p>
+
+<p align="center">Filter topics such as politics, sports, news etc. from Reddit using a trained AI model</p>
 
 ## Training
 
@@ -34,6 +38,15 @@ women & minorities       0.64      0.47      0.54      3131
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
 
 ## Live hosting
+
+> [!IMPORTANT]
+> If you refresh the site too often, you will reach the Reddit API limit.
+> 
+> If no posts are shown, wait a while before visiting the site again.
+
+The frontend and backend are both hosted on [Render](https://render.com/).
+
+The site can be viewed at [filtereddit.onrender.com](https://filtereddit.onrender.com).
 
 ## Self-hosting
 
