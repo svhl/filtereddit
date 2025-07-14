@@ -115,7 +115,7 @@ function App() {
 				<span className="text-right font-sans">
 					svhl |{" "}
 					<a
-						href="https://github.com/svhl"
+						href="https://github.com/svhl/filtereddit"
 						className="text-decoration-line: underline"
 					>
 						GitHub
