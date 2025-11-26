@@ -40,6 +40,11 @@ women & minorities       0.64      0.47      0.54      3131
 ## Live hosting
 
 > [!IMPORTANT]
+> The frontend makes API calls rather than the backend to avoid rate limits.
+> 
+> Please ensure cross-site cookies, tracking content, etc. are allowed in your browser.
+
+> [!NOTE]
 > If you refresh the site too often, you will reach the Reddit API limit.
 > 
 > If no posts are shown, wait a while before visiting the site again.
