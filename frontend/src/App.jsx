@@ -28,10 +28,10 @@ function App() {
 		const fetchSubreddits = async () => {
 			try {
 				const endpoints = [
-					"https://www.reddit.com/r/news/new.json?limit=10",
-					"https://www.reddit.com/r/sports/new.json?limit=10",
-					"https://www.reddit.com/r/fauxmoi/new.json?limit=10",
-					"https://www.reddit.com/r/music/new.json?limit=10",
+					"https://www.reddit.com/r/news/top.json?t=day&limit=10",
+					"https://www.reddit.com/r/sports/top.json?t=day&limit=10",
+					"https://www.reddit.com/r/fauxmoi/top.json?t=day&limit=10",
+					"https://www.reddit.com/r/music/top.json?t=day&limit=10",
 				];
 
 				// Fetch all in parallel
@@ -58,7 +58,7 @@ function App() {
 
 				setPosts(rawPosts);
 
-				// Classify
+				// Predict category
 				const titles = rawPosts.map((p) => p.title);
 				const response = await axios.post("/predict", {
 					titles,
@@ -79,7 +79,6 @@ function App() {
 		fetchSubreddits();
 	}, []);
 
-	// Remove handleApplyFilter and update toggleCategory to filter immediately
 	const toggleCategory = (category) => {
 		setSelectedCategories((prev) => {
 			const newSelected = prev.includes(category)
@@ -116,6 +115,7 @@ function App() {
 					svhl |{" "}
 					<a
 						href="https://github.com/svhl/filtereddit"
+						target="_blank"
 						className="text-decoration-line: underline"
 					>
 						GitHub
@@ -124,10 +124,10 @@ function App() {
 			</div>
 			<hr className="border-black-200 mb-2" />
 
-			{/* Filter UI */}
 			<div className="mb-6">
 				<div className="flex flex-wrap justify-start gap-2 mb-10 mt-5">
 					{allCategories.map((cat) => (
+						// Colorize category buttons at top
 						<span
 							key={cat}
 							onClick={() => toggleCategory(cat)}
@@ -159,10 +159,8 @@ function App() {
 						</span>
 					))}
 				</div>
-				{/* Removed Apply Filter button */}
 			</div>
 
-			{/* Posts grid */}
 			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
 				{filteredPosts.map((post, idx) => (
 					<div
@@ -185,6 +183,7 @@ function App() {
 						<span
 							className={`mt-4 text-xs px-2 py-1 self-start capitalize
                 ${
+					// Colorize category labels for post
 					post.category.toLowerCase() === "business" ||
 					post.category.toLowerCase() === "technology" ||
 					post.category.toLowerCase() === "science" ||

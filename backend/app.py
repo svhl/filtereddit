@@ -6,24 +6,19 @@ import os
 app = Flask(__name__, static_folder='../frontend/dist', static_url_path='')
 CORS(app)
 
-# Load your model (make sure model.pkl is in the same folder)
 model = joblib.load('model.pkl')
 
+# Serve index.html
 @app.route('/', methods=['GET'])
 def home():
     return send_from_directory(app.static_folder, 'index.html')
 
+# Serve all other static files
 @app.route('/<path:path>', methods=['GET'])
 def static_proxy(path):
     return send_from_directory(app.static_folder, path)
 
-@app.route('/classify', methods=['POST'])
-def classify():
-	data = request.json
-	texts = data.get('texts', [])
-	predictions = model.predict(texts)
-	return jsonify({'predictions': predictions.tolist()})
-
+# Predict category
 @app.route('/predict', methods=['POST'])
 def predict():
 	titles = request.json.get('titles', [])

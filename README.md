@@ -4,7 +4,7 @@
   <img src="https://github.com/user-attachments/assets/f109cfef-6617-4884-8b21-a086367d3d87" width="400">
 </p>
 
-<p align="center">Filter topics such as politics, sports, news etc. from Reddit using a trained AI model</p>
+<p align="center">Get the top Reddit posts of the day, filtered by topics such as politics, sports, news etc. using a trained AI model</p>
 
 ## Training
 
