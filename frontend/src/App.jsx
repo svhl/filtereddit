@@ -6,6 +6,9 @@ function App() {
 	const [classified, setClassified] = useState([]);
 	const [selectedCategories, setSelectedCategories] = useState([]);
 	const [filteredPosts, setFilteredPosts] = useState([]);
+	const [showDeprecationPopup, setShowDeprecationPopup] = useState(true);
+	const [isDeprecationPopupVisible, setIsDeprecationPopupVisible] =
+		useState(false);
 
 	const allCategories = [
 		"business",
@@ -25,6 +28,10 @@ function App() {
 	];
 
 	useEffect(() => {
+		const enterTimer = window.setTimeout(() => {
+			setIsDeprecationPopupVisible(true);
+		}, 10);
+
 		const fetchSubreddits = async () => {
 			try {
 				const endpoints = [
@@ -77,7 +84,16 @@ function App() {
 		};
 
 		fetchSubreddits();
+
+		return () => window.clearTimeout(enterTimer);
 	}, []);
+
+	const dismissDeprecationPopup = () => {
+		setIsDeprecationPopupVisible(false);
+		window.setTimeout(() => {
+			setShowDeprecationPopup(false);
+		}, 240);
+	};
 
 	const toggleCategory = (category) => {
 		setSelectedCategories((prev) => {
@@ -99,6 +115,47 @@ function App() {
 
 	return (
 		<div className="p-6">
+			{showDeprecationPopup ? (
+				<div
+					className="fixed inset-0 z-50 flex items-center justify-center px-4"
+					style={{
+						backgroundColor: "rgba(10, 10, 10, 0.72)",
+						opacity: isDeprecationPopupVisible ? 1 : 0,
+						transition: "opacity 220ms ease",
+					}}
+				>
+					<div
+						className="w-full max-w-xl bg-white p-8"
+						style={{
+							opacity: isDeprecationPopupVisible ? 1 : 0,
+							transition:
+								"opacity 220ms ease, transform 220ms ease",
+						}}
+					>
+						<h2 className="mb-4 font-dmserif text-3xl text-gray-900 sm:text-4xl">
+							This website is deprecated
+						</h2>
+						<p className="mb-6 text-sm leading-7 text-gray-700 sm:text-base">
+							Reddit has updated its API, so this site can no
+							 longer reliably fetch posts. Check out the (much better) Reddit <a href="https://github.com/svhl/redpen" target="_blank" rel="noreferrer" className="underline decoration-2 underline-offset-4" style={{ color: "#ab0613" }}>browser extension</a> instead.
+						</p>
+						<button
+							type="button"
+							onClick={dismissDeprecationPopup}
+							className="bg-gray-100 px-5 py-2 font-arvo text-sm text-gray-800 transition hover:text-white"
+							style={{ backgroundColor: "#f3f4f6" }}
+							onMouseEnter={(event) => {
+								event.currentTarget.style.backgroundColor = "#1f2937";
+							}}
+							onMouseLeave={(event) => {
+								event.currentTarget.style.backgroundColor = "#f3f4f6";
+							}}
+						>
+							OK
+						</button>
+					</div>
+				</div>
+			) : null}
 			<h1 className="text-5xl font-bold text-gray-800 mb-4 text-left font-dmserif sm:text-7xl">
 				Filte/r/eddit
 			</h1>

@@ -6,6 +6,9 @@
 
 <p align="center">Get the top Reddit posts of the day, filtered by topics such as politics, sports, news etc. using a trained AI model</p>
 
+> [!NOTE]  
+> Reddit has updated its API, so this site can no longer reliably fetch posts. Check out the (much better) Reddit [browser extension](https://github.com/svhl/redpen) instead.
+
 ## Training
 
 The model was trained using the datasets [News Category Dataset](https://www.kaggle.com/datasets/rmisra/news-category-dataset) by Risabh Misra and [News Articles Classification Dataset for NLP & ML](https://www.kaggle.com/datasets/banuprakashv/news-articles-classification-dataset-for-nlp-and-ml) by Banuprakash V. The categories have been simplified to business, education, entertainment, food, news, parenting, politics, science, sports, style & beauty, technology, travel, wellness, and women & minorities. The accuracy of the model is 69%.

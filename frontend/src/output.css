@@ -23075,6 +23075,10 @@ video {
   font-family: DM Serif Display, serif;
 }
 
+.font-arvo {
+  font-family: Arvo, serif;
+}
+
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
@@ -55041,6 +55045,10 @@ video {
     font-family: DM Serif Display, serif;
   }
 
+  .sm\:font-arvo {
+    font-family: Arvo, serif;
+  }
+
   .sm\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
@@ -86621,6 +86629,10 @@ video {
 
   .md\:font-dmserif {
     font-family: DM Serif Display, serif;
+  }
+
+  .md\:font-arvo {
+    font-family: Arvo, serif;
   }
 
   .md\:text-xs {
@@ -118205,6 +118217,10 @@ video {
     font-family: DM Serif Display, serif;
   }
 
+  .lg\:font-arvo {
+    font-family: Arvo, serif;
+  }
+
   .lg\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
@@ -149787,6 +149803,10 @@ video {
     font-family: DM Serif Display, serif;
   }
 
+  .xl\:font-arvo {
+    font-family: Arvo, serif;
+  }
+
   .xl\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
@@ -181367,6 +181387,10 @@ video {
 
   .\32xl\:font-dmserif {
     font-family: DM Serif Display, serif;
+  }
+
+  .\32xl\:font-arvo {
+    font-family: Arvo, serif;
   }
 
   .\32xl\:text-xs {
